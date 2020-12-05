@@ -17,7 +17,6 @@ def binarySearch(sequence,left,right,first,second):
 def sigma(n):
     return n*(n+1)//2
 
-ans=0
 total=0
 start=1023
 end=0
@@ -30,8 +29,7 @@ with open('../input.txt','r') as f:
         start=min(start,seatID)
         end=max(end,seatID)
         total+=seatID
-        ans=max(ans,seatID)
     missing=sigma(end)-sigma(start-1)-total
-    print(ans)
+    print(end)
     print(missing)
     f.close()
