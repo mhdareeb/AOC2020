@@ -14,20 +14,16 @@ long long int findWeakness(vector<long long int>& nums, int idx)
 {
     long long int target=nums[idx],sum=0,ans;
     int i=0,j=0;
-    while(i<idx && j<idx)
+    while(sum!=target)
     {
-        if(sum==target)
-        {
-            long long int smallest=*min_element(range(nums,i,j));
-            long long int largest=*max_element(range(nums,i,j));
-            ans=smallest+largest;
-            break;
-        }
         while(j<idx && sum<target)
             sum+=nums[j++];
         while(i<idx && sum>target)
             sum-=nums[i++];
     }
+    long long int smallest=*min_element(range(nums,i,j));
+    long long int largest=*max_element(range(nums,i,j));
+    ans=smallest+largest;
     return ans;
 }
 
