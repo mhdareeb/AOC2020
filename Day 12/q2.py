@@ -61,5 +61,5 @@ with open('../input.txt','r') as f:
             forward(value)
         else:
             waypoint=steer(waypoint,code,value)
-        # print(ferry, waypoint)
     print(abs(ferry[0])+abs(ferry[1]))
+    f.close()

@@ -53,3 +53,4 @@ with open('../input.txt','r') as f:
         else:
             direction=steer(direction,code,value)
     print(abs(ferry[0])+abs(ferry[1]))
+    f.close()
