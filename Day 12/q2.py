@@ -5,7 +5,7 @@ if(os.getenv('username')=="Areeb"):
     sys.stdin = open('../input.txt', 'r')
     sys.stdout = open('../output.txt', 'w')
 
-directions={0:'east',1:'north',2:'west',3:'south'}
+directions={'E':0,'N':1,'W':2,'S':3}
 
 def steer(waypoint,turn, degrees):
     x=waypoint[0]-ferry[0]
@@ -49,17 +49,11 @@ with open('../input.txt','r') as f:
         instruction=line.strip()
         code=instruction[0]
         value=int(instruction[1:])
-        if(code=='E'):
-            shift(0,value)
-        elif(code=='N'):
-            shift(1,value)
-        elif(code=='W'):
-            shift(2,value)
-        elif(code=='S'):
-            shift(3,value)
-        elif(code=='F'):
+        if(code=='F'):
             forward(value)
-        else:
+        elif(code in ['L','R']):
             waypoint=steer(waypoint,code,value)
+        else:
+            shift(directions[code],value)
     print(abs(ferry[0])+abs(ferry[1]))
     f.close()
