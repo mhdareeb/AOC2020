@@ -17,18 +17,13 @@ def validProd(timestamp):
 minTime=int(input())
 line=list(input().split(','))
 buses=[]
-maxBus=-float('inf')
-firstBus=-1
 maxProd=1
 for val in line:
     if(val=='x'):
         buses.append(val)
     else:
         buses.append(int(val))
-        if(firstBus==-1):
-            firstBus=int(val)
         maxProd*=int(val)
-        maxBus=max(maxBus,int(val))
 
 n=len(buses)
 t=0
