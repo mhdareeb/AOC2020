@@ -37,3 +37,4 @@ with open('../input.txt','r') as f:
             memory[address]=mutated
             total+=mutated
     print(total)
+    f.close()

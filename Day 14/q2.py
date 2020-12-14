@@ -54,3 +54,4 @@ with open('../input.txt','r') as f:
                 memory[address]=value
                 total+=value
     print(total)
+    f.close()
