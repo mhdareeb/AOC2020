@@ -19,19 +19,17 @@ def mutate(mask,x):
     return result
 
 def combinations(sequence,i):
-    global mutated_addresses
     if(i==len(sequence)):
-        decimal=int(''.join(sequence),2)
-        mutated_addresses.append(decimal)
+        yield ''.join(sequence)
         return
     if(sequence[i]=='X'):
         sequence[i]='0'
-        combinations(sequence,i+1)
+        yield from combinations(sequence,i+1)
         sequence[i]='1'
-        combinations(sequence,i+1)
+        yield from combinations(sequence,i+1)
         sequence[i]='X'
     else:
-        combinations(sequence,i+1)
+        yield from combinations(sequence,i+1)
 
 with open('../input.txt','r') as f:
     total=0
@@ -46,8 +44,7 @@ with open('../input.txt','r') as f:
             original=int(line[start+1:end])
             value=int(line[end+4:])
             mutated=mutate(mask,original)
-            mutated_addresses=[]
-            combinations(mutated,0)
+            mutated_addresses=combinations(mutated,0)
             for address in mutated_addresses:
                 if address in memory:
                     total-=memory[address]
