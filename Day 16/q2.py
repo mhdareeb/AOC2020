@@ -6,16 +6,9 @@ if(os.getenv('username')=="Areeb"):
     sys.stdout = open('../output.txt', 'w')
 
 def removePossible(j):
-    for i in range(n):
-        if i not in known:
-            if j in matching[i]:
-                matching[i].remove(j)
-
-def undefined():
-    for rule in matching:
-        if(len(matching[rule])>1):
-            return True
-    return False
+    for i in unknown:
+        if j in matching[i]:
+            matching[i].remove(j)
 
 def isValidRule(entry,rule):
     for limits in rule:
@@ -39,9 +32,8 @@ def findCategory(column):
 
 def isValid(value):
     for rule in rules:
-        for limits in rule:
-            if value in range(limits[0],limits[1]+1):
-                return True
+        if isValidRule(value,rule):
+            return True
     return False
 
 def validTicket(nearby):
@@ -74,15 +66,14 @@ with open('../input.txt','r') as f:
         column_entries=[]
         for ticket in valid:
             column_entries.append(ticket[i])
-        j=findCategory(column_entries)
-        matching[i]=j
-    known=set([])
-    while(undefined()):
-        for i in range(n):
-            if i not in known:
-                if(len(matching[i])==1):
-                    known.add(i)
-                    removePossible(matching[i][0])
+        matching[i]=findCategory(column_entries)
+    unknown=set(range(n))
+    while(unknown):
+        for i in unknown:
+            if(len(matching[i])==1):
+                break
+        unknown.remove(i)
+        removePossible(matching[i][0])
     prod=1
     for i in range(n):
         if matching[i][0] in range(6):
